@@ -5,6 +5,8 @@ import java.util.ArrayList;;
 public class PathFinder {
 
     private ArrayList<String> path;
+    private Body source;
+    private Food food;
 
     public PathFinder() {
 
@@ -26,6 +28,10 @@ public class PathFinder {
                     path.add(put);
                 }
             }
+            
+            if (foundPath(source, food, put)) {
+                System.out.println(put);
+            }
             path.remove(0);
         }
 
@@ -40,6 +46,9 @@ public class PathFinder {
         int fX = food.getX();
         int fY = food.getY();
 
+        this.source = source;
+        this.food = food;
+
         for (char direction : move.toCharArray()) {
             if (direction == 'U') {
                 ySpeed = -10;
@@ -53,7 +62,14 @@ public class PathFinder {
 
             sX += xSpeed;
             sY += ySpeed;
+            
+            xSpeed = 0;
+            ySpeed = 0;
         }
+        
+        System.out.println("Head:" + sX + sY);
+        System.out.println("Food:" + fX + fY);
+        System.out.println();
 
         return sX == fX && sY == fY;
 
@@ -94,6 +110,12 @@ public class PathFinder {
     }
 
     public ArrayList<String> getPath() {
-        return path;
+        ArrayList<String> result = new ArrayList<>();
+        for (String p : path) {
+            if (valid(source, food, p)) {
+                result.add(p);
+            }
+        }
+        return result;
     }
 }
