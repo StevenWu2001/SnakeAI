@@ -7,6 +7,7 @@ public class PathFinder {
     private ArrayList<String> path;
     private Body source;
     private Food food;
+    private String stPath;
 
     public PathFinder() {
 
@@ -30,7 +31,7 @@ public class PathFinder {
             }
             
             if (foundPath(source, food, put)) {
-                System.out.println(put);
+                stPath = put;
             }
             path.remove(0);
         }
@@ -67,9 +68,9 @@ public class PathFinder {
             ySpeed = 0;
         }
         
-        System.out.println("Head:" + sX + sY);
-        System.out.println("Food:" + fX + fY);
-        System.out.println();
+//        System.out.println("Head:" + sX + sY);
+//        System.out.println("Food:" + fX + fY);
+//        System.out.println();
 
         return sX == fX && sY == fY;
 
@@ -109,13 +110,7 @@ public class PathFinder {
         System.out.println(path.get(path.size() - 1));
     }
 
-    public ArrayList<String> getPath() {
-        ArrayList<String> result = new ArrayList<>();
-        for (String p : path) {
-            if (valid(source, food, p)) {
-                result.add(p);
-            }
-        }
-        return result;
+    public String getPath() {
+        return stPath;
     }
 }

@@ -17,10 +17,10 @@ public class Food {
         
         x = (int)(x / 10) * 10;
         y = (int)(y / 10) * 10;
-        System.out.println("Food:");
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println();
+//        System.out.println("Food:");
+//        System.out.println(x);
+//        System.out.println(y);
+//        System.out.println();
         
         size = 10;
     }

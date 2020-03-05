@@ -41,9 +41,9 @@ public class Snake {
             snakeBodies.get(i).setY(snakeBodies.get(i - 1).getY());
         }
 
-        System.out.println("Head:");
-        System.out.println(head.getX());
-        System.out.println(head.getY());
+//        System.out.println("Head:");
+//        System.out.println(head.getX());
+//        System.out.println(head.getY());
         head.moveX(speedX);
         head.moveY(speedY);
 

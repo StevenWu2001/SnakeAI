@@ -29,6 +29,10 @@ public class GameInterface extends JPanel implements ActionListener, KeyListener
     private int yVel;
     private Food food;
     private int score = 0;
+    private PathFinder pathFinder;
+
+    private String path;
+    private int pathIndex = 0;
 
     public GameInterface() {
         timer.start();
@@ -39,6 +43,10 @@ public class GameInterface extends JPanel implements ActionListener, KeyListener
 
         snake = new Snake();
         food = new Food(Main.WIDTH, Main.HEIGHT);
+        pathFinder = new PathFinder();
+        pathFinder.shortestPath(snake.head(), food);
+        path = pathFinder.getPath();
+        System.out.println(path);
         xVel = 0;
         yVel = 0;
     }
@@ -55,53 +63,77 @@ public class GameInterface extends JPanel implements ActionListener, KeyListener
 
     }
 
+    public void moveAI() {
+        char move = path.charAt(pathIndex);
+        if (move == 'U') {
+            yVel = -10;
+        } else if (move == 'D') {
+            yVel = 10;
+        } else if (move == 'L') {
+            xVel = -10;
+        } else if (move == 'R') {
+            xSpeed = 10;
+        }
+        pathIndex++;
+    }
+
     public void actionPerformed(ActionEvent e) {
         if (snake.collide(food)) {
             food = new Food(Main.WIDTH, Main.HEIGHT);
             score++;
             snake.add();
+            pathIndex = 0;
         }
 
+        moveAI();
         snake.move(xVel, yVel);
 
-        /*
-         * //Troll if (snake.getSnake().get(0).getX() < food.getX()) { xVel = 10; yVel =
-         * 0; } else if (snake.getSnake().get(0).getX() > food.getX()) { xVel = -10;
-         * yVel = 0; }
-         * 
-         * if (snake.getSnake().get(0).getX() == food.getX()) { xVel = 0; if
-         * (snake.getSnake().get(0).getY() > food.getY()) { yVel = -10; } else if
-         * (snake.getSnake().get(0).getY() < food.getY()) { yVel = 10; } }
-         */
+        // Troll
+//        if (snake.getSnake().get(0).getX() < food.getX()) {
+//            xVel = 10;
+//            yVel = 0;
+//        } else if (snake.getSnake().get(0).getX() > food.getX()) {
+//            xVel = -10;
+//            yVel = 0;
+//        }
+//
+//        if (snake.getSnake().get(0).getX() == food.getX()) {
+//            xVel = 0;
+//            if (snake.getSnake().get(0).getY() > food.getY()) {
+//                yVel = -10;
+//            } else if (snake.getSnake().get(0).getY() < food.getY()) {
+//                yVel = 10;
+//            }
+//        }
 
         if (snake.dead()) {
             System.out.println("game over.");
         }
 
         repaint();
-
+        revalidate();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
         int c = e.getKeyCode();
-        if (c == KeyEvent.VK_LEFT) {
+        if (c == KeyEvent.VK_A) {
             if (xVel == 0 || snake.getSnake().size() == 1) {
                 xVel = -10;
                 yVel = 0;
             }
-        } else if (c == KeyEvent.VK_RIGHT) {
+        } else if (c == KeyEvent.VK_D) {
             if (xVel == 0 || snake.getSnake().size() == 1) {
                 xVel = 10;
                 yVel = 0;
             }
-        } else if (c == KeyEvent.VK_UP) {
+        } else if (c == KeyEvent.VK_W) {
             if (yVel == 0 || snake.getSnake().size() == 1) {
                 xVel = 0;
                 yVel = -10;
             }
-        } else if (c == KeyEvent.VK_DOWN) {
+        } else if (c == KeyEvent.VK_S) {
             if (yVel == 0 || snake.getSnake().size() == 1) {
                 xVel = 0;
                 yVel = 10;
