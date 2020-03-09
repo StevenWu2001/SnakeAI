@@ -12,8 +12,8 @@ public class Food {
     
     public Food(int width, int height) {
         Random r = new Random();
-        x = r.nextInt(((int)(width * 0.8) + 10) + 1) + 10;
-        y = r.nextInt(((int)(height * 0.8) + 10) + 1) + 10;
+        x = r.nextInt(((int)(width * 0.7) + 10) + 1) + 10;
+        y = r.nextInt(((int)(height * 0.7) + 10) + 1) + 10;
         
         x = (int)(x / 10) * 10;
         y = (int)(y / 10) * 10;

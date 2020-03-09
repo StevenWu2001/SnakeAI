@@ -12,24 +12,15 @@ public class Test extends JPanel{
      */
     private static final long serialVersionUID = 1L;
     
-    public Test() {
-        this.addKeyListener(new Key());
-    }
-    
-    class Key extends KeyAdapter{
-        public void keyPressed(KeyEvent e) {
-            if(e.getExtendedKeyCode() == KeyEvent.VK_A) {
-                System.out.println("up");
+    public static void main(String[] args) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 5; j < 8; j++) {
+                System.out.println(j);
+                if (j > 6) {
+                    continue;
+                }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        JFrame jf = new JFrame();
-        jf.setSize(500, 500);
-        jf.setVisible(true);
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.setFocusable(true);
     }
     
     
