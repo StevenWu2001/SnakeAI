@@ -84,5 +84,23 @@ public class Snake {
         }
         return head.getX() > Main.WIDTH || head.getY() > Main.HEIGHT || head.getX() < 0 || head.getY() < 0;
     }
+    
+    public void printSnake() {
+        for (int i = 0; i < snakeBodies.size(); i++) {
+            System.out.println("Snake: " + snakeBodies.get(i).getX() + " " + snakeBodies.get(i).getY());
+        }
+        System.out.println();
+    }
+    
+    public boolean inSnake(Food food) {
+        boolean result = false;
+        for (int i = 1; i < snakeBodies.size(); i++) {
+            if (snakeBodies.get(i).getX() == food.getX() && snakeBodies.get(i).getY() == food.getY()) {
+                result = true;
+            }
+        }
+        
+        return result;
+    }
 
 }

@@ -11,8 +11,8 @@ import javax.swing.Timer;
 
 public class Main{
     
-    public static int WIDTH = 400;
-    public static int HEIGHT = 400;
+    public static int WIDTH = 500;
+    public static int HEIGHT = 500;
     
     public static void main(String[] args) {
         GameInterface game = new GameInterface();

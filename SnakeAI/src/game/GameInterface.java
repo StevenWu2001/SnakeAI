@@ -24,7 +24,7 @@ public class GameInterface extends JPanel implements ActionListener, KeyListener
      */
     private Snake snake;
     private static final long serialVersionUID = 1L;
-    private Timer timer = new Timer(25, this);
+    private Timer timer = new Timer(15, this);
     private int xVel;
     private int yVel;
     private Food food;
@@ -50,11 +50,6 @@ public class GameInterface extends JPanel implements ActionListener, KeyListener
         aStar.initialize(start, goal);
         aStar.setSnake(snake);
         path = aStar.getPath();
-        for (Node n : path) {
-            System.out.println(n.getX());
-            System.out.println(n.getY());
-            System.out.println();
-        }
 
         xVel = 0;
         yVel = 0;
@@ -82,45 +77,30 @@ public class GameInterface extends JPanel implements ActionListener, KeyListener
     }
 
     public void actionPerformed(ActionEvent e) {
+        // If the snake eats the food
         if (snake.collide(food)) {
             food = new Food(Main.WIDTH, Main.HEIGHT);
+
+            while (snake.inSnake(food)) {
+                food = new Food(Main.WIDTH, Main.HEIGHT);
+            }
+            System.out.println("Food: " + food.getX() + " " + food.getY());
             score++;
 
             snake.add();
+            //snake.printSnake();
             pathIndex = 0;
-
+            
+            // Generate new path to the food
             Node start = new Node(snake.head().getX(), snake.head().getY(), null);
             Node goal = new Node(food.getX(), food.getY(), null);
             aStar.initialize(start, goal);
             aStar.setSnake(snake);
             path = aStar.getPath();
-            for (Node n : path) {
-                System.out.println(n.getX());
-                System.out.println(n.getY());
-                System.out.println();
-            }
         }
-
+        
         moveAI();
         snake.move(xVel, yVel);
-
-        // Troll
-//        if (snake.getSnake().get(0).getX() < food.getX()) {
-//            xVel = 10;
-//            yVel = 0;
-//        } else if (snake.getSnake().get(0).getX() > food.getX()) {
-//            xVel = -10;
-//            yVel = 0;
-//        }
-//
-//        if (snake.getSnake().get(0).getX() == food.getX()) {
-//            xVel = 0;
-//            if (snake.getSnake().get(0).getY() > food.getY()) {
-//                yVel = -10;
-//            } else if (snake.getSnake().get(0).getY() < food.getY()) {
-//                yVel = 10;
-//            }
-//        }
 
         if (snake.dead()) {
             System.out.println("game over.");

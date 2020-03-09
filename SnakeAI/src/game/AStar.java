@@ -69,12 +69,13 @@ public class AStar {
                 for (int k = 0; k < children.size(); k++) {
                     if (children.get(k).getX() == invalid.get(l).getX()
                             && children.get(k).getY() == invalid.get(l).getY()) {
-                        System.out.println(1);
                         children.remove(k);
                     }
 
                 }
             }
+            
+            //System.out.println(children.size());
 
             OUTER_LOOP: for (int i = 0; i < children.size(); i++) {
                 Node child = children.get(i);
@@ -109,6 +110,7 @@ public class AStar {
                 }
 
                 open.add(child);
+                //System.out.println(current.getX() + " " + current.getY());
             }
         }
 
