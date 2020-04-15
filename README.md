@@ -1,7 +1,7 @@
-# SnakeAI Project
+# Snake AI Project
+### Steven Wu, Cindy Zou, William Yang, Jeffrey Chen
 
-
-## Setting
+## Background
 Initially, the snake is randomly placed on a 25 * 25 grid map, with the food generated randomly on the map as well.
 ## A* Path Finding Algorithm https://en.wikipedia.org/wiki/A*_search_algorithm
 The first approach we implemented is A* path finding algorithm. This is a common solution when approximating the shortest path between two nodes, and many map-based games are using such algorithm for path finding.
